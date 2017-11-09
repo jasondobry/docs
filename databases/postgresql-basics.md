@@ -1,11 +1,18 @@
+---
+title: PostgreSQL Basics
+image: https://www.thermo.io/wp-content/themes/thermo/static/images/perks-1.svg
+description: Installation, connection, database and role creation, and other basics.
+---
+
+# PostgreSQL Basics
 ## Overview
-This guide covers how to install PostgreSQL (PgSQL) server on your Ubuntu installation and introduces basic PgSQL commands. We recommend you complete the following steps as a limited sudo user. For more information about setting up limited sudo users, see [Creating sudo users on CentOS](https://github.com/thermoio/docs/blob/master/getting-started/creating-sudo-users-on-centos).
+This guide covers how to install PostgreSQL (PgSQL) server on your Ubuntu installation and introduces basic PgSQL commands. We recommend you complete the following steps as a limited sudo user. For more information about setting up limited sudo users, see [Creating sudo users on CentOS](https://www.thermo.io/how-to/security/creating-sudo-users).
 ## Installing PgSQL
-- [Ubuntu](https://github.com/thermoio/docs/blob/master/getting-started/installing-pgsql-on-ubuntu.md)
-- [CentOS](https://github.com/thermoio/docs/blob/master/getting-started/installing-pgsql-on-centos.md)
+- [Ubuntu](https://www.thermo.io/how-to/databases/installing-pgsql-on-ubuntu)
+- [CentOS](https://www.thermo.io/how-to/databases/installing-pgsql-on-centos)
 
 ## Connecting to PgSQL
-After installation, you must connect to the Postgres server. PgSQL creates a new user on installation called postgres, which you will use to connect. 
+After installation, you must connect to the Postgres server. PgSQL creates a new user on installation called postgres, which you will use to connect.
 
 To connect:
 
@@ -37,7 +44,7 @@ Type "help" for help.
 
 postgres=# \du
                                    List of roles
- Role name |                         Attributes                         | Member of 
+ Role name |                         Attributes                         | Member of
 -----------+------------------------------------------------------------+-----------
  postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
 ```
@@ -47,7 +54,7 @@ postgres=# \l
                                   List of databases
    Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   
 -----------+----------+----------+-------------+-------------+-----------------------
- postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | 
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
  template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
            |          |          |             |             | postgres=CTc/postgres
  template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
@@ -55,7 +62,7 @@ postgres=# \l
 (3 rows)
 ```
 ## Creating new databases and roles
-Next, this guide demonstrates how to create a new database, a new role, and assign the new role to that database. 
+Next, this guide demonstrates how to create a new database, a new role, and assign the new role to that database.
 **Attention:** These commands need to be ran as the `postgres` user on the linux system, not from within psql.
 1. Create a new role to later be added to the new database. The `--pwprompt` option will ask you to set the user’s password.
 ```
@@ -82,7 +89,7 @@ createdb test db
 ## Asssigning roles to groups
 A role can alternatively be used as a group. You can grant privileges to the group for ease of management and then assign roles to this group.
 
-To start, from the Linux command prompt, create a new user. The `--no-login` flag is specified here, as groups do not need to log in to the pgsql server. 
+To start, from the Linux command prompt, create a new user. The `--no-login` flag is specified here, as groups do not need to log in to the pgsql server.
 ```
 createuser testgroup --no-login
 ```
@@ -92,7 +99,7 @@ psql postgres
 GRANT testgroup TO testrole;
 ```
 ## Cleaning up
-It’s worthwhile to practice “good housekeeping” by removing all of your recent changes. 
+It’s worthwhile to practice “good housekeeping” by removing all of your recent changes.
 1. To start, remove the testrole from the testgroup:
 ```
 REVOKE testgroup FROM testuser;
